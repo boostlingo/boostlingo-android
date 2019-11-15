@@ -22,6 +22,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.SwitchCompat;
 import android.widget.ArrayAdapter;
 
+import com.boostlingo.android.BLApiCallException;
 import com.boostlingo.android.BLCall;
 import com.boostlingo.android.BLCallStateListener;
 import com.boostlingo.android.BLLogLevel;
@@ -151,9 +152,16 @@ public class MainActivity extends AppCompatActivity implements BLCallStateListen
                 public void onError(Throwable e) {
                     runOnUiThread(() -> {
                         updateUI(State.NOT_AUTHENTICATED);
-                        Snackbar.make(clRoot,
-                                e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                SNACKBAR_DURATION).show();
+                        BLApiCallException apiCallException = (BLApiCallException)e;
+                        if (apiCallException != null) {
+                            Snackbar.make(clRoot,
+                                    e != null ? "Error: " + apiCallException.getLocalizedMessage() + " StatusCode: " + apiCallException.getStatusCode() : "Error",
+                                    SNACKBAR_DURATION).show();
+                        } else {
+                            Snackbar.make(clRoot,
+                                    e != null ? "Error: " + e.getLocalizedMessage() : "Error",
+                                    SNACKBAR_DURATION).show();
+                        }
                     });
                 }
             });
@@ -231,9 +239,16 @@ public class MainActivity extends AppCompatActivity implements BLCallStateListen
                 public void onError(Throwable e) {
                     runOnUiThread(() -> {
                         updateUI(State.AUTHENTICATED);
-                        Snackbar.make(clRoot,
-                                e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                SNACKBAR_DURATION).show();
+                        BLApiCallException apiCallException = (BLApiCallException)e;
+                        if (apiCallException != null) {
+                            Snackbar.make(clRoot,
+                                    e != null ? "Error: " + apiCallException.getLocalizedMessage() + " StatusCode: " + apiCallException.getStatusCode() : "Error",
+                                    SNACKBAR_DURATION).show();
+                        } else {
+                            Snackbar.make(clRoot,
+                                    e != null ? "Error: " + e.getLocalizedMessage() : "Error",
+                                    SNACKBAR_DURATION).show();
+                        }
                     });
                 }
             });
@@ -267,29 +282,29 @@ public class MainActivity extends AppCompatActivity implements BLCallStateListen
                         ((Language) spLanguageTo.getSelectedItem()).id,
                         ((ServiceType) spServiceType.getSelectedItem()).id,
                         ((Gender) spGender.getSelectedItem()).id))
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        compositeDisposable.add(d);
-                    }
+        .subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                compositeDisposable.add(d);
+            }
 
-                    @Override
-                    public void onComplete() {
-                        runOnUiThread(() -> {
-                            updateUI(State.CALLING);
-                        });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        runOnUiThread(() -> {
-                            updateUI(State.AUTHENTICATED);
-                            Snackbar.make(clRoot,
-                                    e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                    SNACKBAR_DURATION).show();
-                        });
-                    }
+            @Override
+            public void onComplete() {
+                runOnUiThread(() -> {
+                    updateUI(State.CALLING);
                 });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                runOnUiThread(() -> {
+                    updateUI(State.AUTHENTICATED);
+                    Snackbar.make(clRoot,
+                            e != null ? "Error: " + e.getLocalizedMessage() : "Error",
+                            SNACKBAR_DURATION).show();
+                });
+            }
+        });
     }
 
     private void updateUI(State state) {
