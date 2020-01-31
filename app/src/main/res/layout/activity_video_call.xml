@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".VideoCallActivity">
+
+    <include layout="@layout/content_video" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:orientation="vertical" >
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/switch_camera_action_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:fabSize="mini"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:tint="@android:color/white"
+            android:src="@drawable/baseline_switch_video_24" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/local_video_action_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:layout_gravity="center"
+            app:fabSize="mini"
+            android:tint="@android:color/white"
+            android:src="@drawable/baseline_videocam_24" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/mute_action_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="mini"
+            android:layout_gravity="center"
+            android:tint="@android:color/white"
+            android:src="@drawable/baseline_mic_24" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/hangup_action_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:fabSize="normal"
+            android:tint="@android:color/white"
+            android:src="@drawable/baseline_call_end_24" />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

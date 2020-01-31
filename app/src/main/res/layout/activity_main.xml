@@ -174,7 +174,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_gender"/>
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_call"
+                android:id="@+id/btn_voice_call"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -183,45 +183,10 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sp_gender"
-                android:text="@string/call"/>
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_call" />
-
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/sw_mute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/sw_speaker"
-                app:layout_constraintTop_toBottomOf="@id/tv_status"
-                android:text="@string/mute"/>
-
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/sw_speaker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintLeft_toRightOf="@id/sw_mute"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_status"
-                android:text="@string/speaker"/>
+                android:text="@string/voice_call"/>
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_hangup"
+                android:id="@+id/btn_video_call"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -229,8 +194,8 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sw_mute"
-                android:text="@string/hang_up"/>
+                app:layout_constraintTop_toBottomOf="@id/btn_voice_call"
+                android:text="@string/video_call" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_call_details"
@@ -241,7 +206,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_hangup"
+                app:layout_constraintTop_toBottomOf="@id/btn_video_call"
                 android:text="@string/call_details"/>
 
         </android.support.constraint.ConstraintLayout>
