@@ -22,10 +22,12 @@ import android.support.v7.widget.SwitchCompat;
 
 import com.boostlingo.android.BLCall;
 import com.boostlingo.android.BLCallStateListener;
+import com.boostlingo.android.BLChatListener;
 import com.boostlingo.android.BLLogLevel;
 import com.boostlingo.android.BLVoiceCall;
 import com.boostlingo.android.Boostlingo;
 import com.boostlingo.android.CallRequest;
+import com.boostlingo.android.ChatMessage;
 
 import io.reactivex.CompletableObserver;
 import io.reactivex.SingleObserver;
@@ -39,7 +41,7 @@ import static com.boostlingo.android.quickstart.MainActivity.CALL_ID_RESULT_CODE
 import static com.boostlingo.android.quickstart.MainActivity.CALL_REQUEST_EXTRA;
 import static com.boostlingo.android.quickstart.MainActivity.SNACKBAR_DURATION;
 
-public class VoiceCallActivity extends AppCompatActivity implements BLCallStateListener {
+public class VoiceCallActivity extends AppCompatActivity implements BLCallStateListener, BLChatListener {
 
     private enum State {
         NO_CALL,
@@ -54,6 +56,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
     private SwitchCompat swMute;
     private SwitchCompat swSpeaker;
     private AppCompatButton btnHangUp;
+    private AppCompatButton btnSendChatMessage;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Boostlingo boostlingo;
@@ -156,6 +159,33 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
             });
         });
 
+        btnSendChatMessage = findViewById(R.id.btn_send_chat_message);
+        btnSendChatMessage.setOnClickListener(v -> {
+            boostlingo.sendChatMessage("Test").subscribe(new SingleObserver<ChatMessage>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+                    compositeDisposable.add(d);
+                }
+
+                @Override
+                public void onSuccess(ChatMessage message) {
+                    runOnUiThread(() -> {
+                        Snackbar.make(clRoot, "Success: Message sent",
+                                SNACKBAR_DURATION).show();
+                    });
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    runOnUiThread(() -> {
+                        Snackbar.make(clRoot,
+                                e != null ? "Error: " + e.getLocalizedMessage() : "Error",
+                                SNACKBAR_DURATION).show();
+                    });
+                }
+            });
+        });
+
         /*
          * Needed for setting/abandoning audio focus during a call
          */
@@ -189,7 +219,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
     }
 
     private void makeCall() {
-        boostlingo.makeVoiceCall(callRequest, this)
+        boostlingo.makeVoiceCall(callRequest, this, this)
                 .subscribe(new SingleObserver<BLVoiceCall>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -280,18 +310,21 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
                 swMute.setEnabled(false);
                 swSpeaker.setEnabled(false);
                 btnHangUp.setEnabled(false);
+                btnSendChatMessage.setEnabled(false);
                 break;
             case CALLING:
                 tvStatus.setText("Calling");
                 swMute.setEnabled(false);
                 swSpeaker.setEnabled(false);
                 btnHangUp.setEnabled(true);
+                btnSendChatMessage.setEnabled(false);
                 break;
             case IN_PROGRESS:
                 tvStatus.setText("Call with: " + ((currentCall != null && currentCall.getInterlocutorInfo() != null) ? currentCall.getInterlocutorInfo().requiredName : ""));
                 swMute.setEnabled(true);
                 swSpeaker.setEnabled(true);
                 btnHangUp.setEnabled(true);
+                btnSendChatMessage.setEnabled(true);
                 break;
         }
     }
@@ -328,6 +361,25 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
             setAudioFocus(false);
             Snackbar.make(clRoot,
                     e != null ? "Call did disconnect with error: " + e.getLocalizedMessage() : "Call did disconnect",
+                    SNACKBAR_DURATION).show();
+        });
+    }
+
+    // Chat Listener
+    @Override
+    public void chatConnected() {
+
+    }
+
+    @Override
+    public void chatDisconnected() {
+
+    }
+
+    @Override
+    public void chatMessageReceived(ChatMessage message) {
+        runOnUiThread(() -> {
+            Snackbar.make(clRoot, "Chat Message Received: " + message.text,
                     SNACKBAR_DURATION).show();
         });
     }

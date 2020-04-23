@@ -88,59 +88,87 @@ public class MainActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(v -> {
             updateUI(State.LOADING);
             boostlingo = new Boostlingo(this, TOKEN, spRegions.getSelectedItem().toString(), BLLogLevel.DEBUG);
-            boostlingo.getCallDictionaries().subscribe(new SingleObserver<CallDictionaries>() {
+
+            boostlingo.initialize().subscribe(new CompletableObserver() {
                 @Override
                 public void onSubscribe(Disposable d) {
-                    compositeDisposable.add(d);
+
                 }
 
                 @Override
-                public void onSuccess(CallDictionaries callDictionaries) {
-                    runOnUiThread(() -> {
-                        ArrayAdapter<Language> languageAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, callDictionaries.languages);
-                        languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                public void onComplete() {
+                    boostlingo.getCallDictionaries().subscribe(new SingleObserver<CallDictionaries>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                            compositeDisposable.add(d);
+                        }
 
-                        spLanguageFrom.setAdapter(languageAdapter);
-                        for (Language language : callDictionaries.languages) {
-                            if (language.id == 4) {
+                        @Override
+                        public void onSuccess(CallDictionaries callDictionaries) {
+                            runOnUiThread(() -> {
+                                ArrayAdapter<Language> languageAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, callDictionaries.languages);
+                                languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                                spLanguageFrom.setAdapter(languageAdapter);
+                                for (Language language : callDictionaries.languages) {
+                                    if (language.id == 4) {
 //                            if (language.id == 9) {
-                                spLanguageFrom.setSelection(callDictionaries.languages.indexOf(language));
-                                break;
-                            }
-                        }
+                                        spLanguageFrom.setSelection(callDictionaries.languages.indexOf(language));
+                                        break;
+                                    }
+                                }
 
-                        spLanguageTo.setAdapter(languageAdapter);
-                        for (Language language : callDictionaries.languages) {
-                            if (language.id == 1) {
+                                spLanguageTo.setAdapter(languageAdapter);
+                                for (Language language : callDictionaries.languages) {
+                                    if (language.id == 1) {
 //                            if (language.id == 35) {
-                                spLanguageTo.setSelection(callDictionaries.languages.indexOf(language));
-                                break;
-                            }
+                                        spLanguageTo.setSelection(callDictionaries.languages.indexOf(language));
+                                        break;
+                                    }
+                                }
+
+                                ArrayAdapter<ServiceType> serviceTypeAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, callDictionaries.serviceTypes);
+                                serviceTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                                spServiceType.setAdapter(serviceTypeAdapter);
+                                for (ServiceType serviceType : callDictionaries.serviceTypes) {
+                                    if (serviceType.id == 1) {
+                                        spServiceType.setSelection(callDictionaries.serviceTypes.indexOf(serviceType));
+                                        break;
+                                    }
+                                }
+
+                                ArrayAdapter<Gender> genderAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, callDictionaries.genders);
+                                genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                                spGender.setAdapter(genderAdapter);
+                                for (Gender gender : callDictionaries.genders) {
+                                    if (gender.id == 1) {
+                                        spGender.setSelection(callDictionaries.genders.indexOf(gender));
+                                        break;
+                                    }
+                                }
+
+                                updateUI(State.AUTHENTICATED);
+                            });
                         }
 
-                        ArrayAdapter<ServiceType> serviceTypeAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, callDictionaries.serviceTypes);
-                        serviceTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                        spServiceType.setAdapter(serviceTypeAdapter);
-                        for (ServiceType serviceType : callDictionaries.serviceTypes) {
-                            if (serviceType.id == 1) {
-                                spServiceType.setSelection(callDictionaries.serviceTypes.indexOf(serviceType));
-                                break;
-                            }
+                        @Override
+                        public void onError(Throwable e) {
+                            runOnUiThread(() -> {
+                                updateUI(State.NOT_AUTHENTICATED);
+                                BLApiCallException apiCallException = (BLApiCallException)e;
+                                if (apiCallException != null) {
+                                    Snackbar.make(clRoot,
+                                            e != null ? "Error: " + apiCallException.getLocalizedMessage() + " StatusCode: " + apiCallException.getStatusCode() : "Error",
+                                            SNACKBAR_DURATION).show();
+                                } else {
+                                    Snackbar.make(clRoot,
+                                            e != null ? "Error: " + e.getLocalizedMessage() : "Error",
+                                            SNACKBAR_DURATION).show();
+                                }
+                            });
                         }
-
-                        ArrayAdapter<Gender> genderAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, callDictionaries.genders);
-                        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                        spGender.setAdapter(genderAdapter);
-                        for (Gender gender : callDictionaries.genders) {
-                            if (gender.id == 1) {
-                                spGender.setSelection(callDictionaries.genders.indexOf(gender));
-                                break;
-                            }
-                        }
-
-                        updateUI(State.AUTHENTICATED);
                     });
                 }
 

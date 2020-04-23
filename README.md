@@ -4,4 +4,4 @@ The Boostlingo Android Java library enables developers to embed the Boostlingo c
 
 ## Docs
 
-[Docs](http://connect.boostlingo.com/sdk/boostlingo-android/0.2.0/docs/index.html)
+[Docs](http://connect.boostlingo.com/sdk/boostlingo-android/0.3.0/docs/index.html)

@@ -22,11 +22,13 @@ import android.widget.Toast;
 
 import com.boostlingo.android.BLCall;
 import com.boostlingo.android.BLCallStateListener;
+import com.boostlingo.android.BLChatListener;
 import com.boostlingo.android.BLLogLevel;
 import com.boostlingo.android.BLVideoCall;
 import com.boostlingo.android.BLVideoListener;
 import com.boostlingo.android.Boostlingo;
 import com.boostlingo.android.CallRequest;
+import com.boostlingo.android.ChatMessage;
 import com.twilio.video.VideoView;
 
 import io.reactivex.CompletableObserver;
@@ -41,7 +43,7 @@ import static com.boostlingo.android.quickstart.MainActivity.CALL_ID_RESULT_CODE
 import static com.boostlingo.android.quickstart.MainActivity.CALL_REQUEST_EXTRA;
 import static com.boostlingo.android.quickstart.MainActivity.SNACKBAR_DURATION;
 
-public class VideoCallActivity extends AppCompatActivity implements BLCallStateListener, BLVideoListener {
+public class VideoCallActivity extends AppCompatActivity implements BLCallStateListener, BLVideoListener, BLChatListener {
 
     private enum State {
         NO_CALL,
@@ -59,6 +61,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
     private FloatingActionButton muteActionFab;
     private FloatingActionButton hangupActionFab;
     private TextView videoStatusTextView;
+    private FloatingActionButton chatActionFab;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private boolean isSpeakerPhoneEnabled = true;
@@ -144,18 +147,51 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
                 currentCall.switchCameraSource();
             }
         });
+
         localVideoActionFab = findViewById(R.id.local_video_action_fab);
         localVideoActionFab.setOnClickListener(v -> {
             if (currentCall != null) {
                 currentCall.setVideoEnabled(!currentCall.isVideoEnabled());
             }
+            // TODO: Show you privacy screen here
+            // Get the requestor profile URL
+            // boostlingo.getProfile()...imageInfo.url(null);
         });
+
         muteActionFab = findViewById(R.id.mute_action_fab);
         muteActionFab.setOnClickListener(v -> {
             if (currentCall != null) {
                 currentCall.setMuted(!currentCall.isMuted());
             }
         });
+
+        chatActionFab = findViewById(R.id.chat_action_fab);
+        chatActionFab.setOnClickListener(v -> {
+            boostlingo.sendChatMessage("Test").subscribe(new SingleObserver<ChatMessage>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+                    compositeDisposable.add(d);
+                }
+
+                @Override
+                public void onSuccess(ChatMessage message) {
+                    runOnUiThread(() -> {
+                        Snackbar.make(clRoot, "Success: Message sent",
+                                SNACKBAR_DURATION).show();
+                    });
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    runOnUiThread(() -> {
+                        Snackbar.make(clRoot,
+                                e != null ? "Error: " + e.getLocalizedMessage() : "Error",
+                                SNACKBAR_DURATION).show();
+                    });
+                }
+            });
+        });
+
         hangupActionFab = findViewById(R.id.hangup_action_fab);
         hangupActionFab.setOnClickListener(v -> {
             updateUI(State.NO_CALL);
@@ -284,7 +320,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
 
     private void connectToRoom() {
         configureAudio(true);
-        boostlingo.makeVideoCall(callRequest, this, this, primaryVideoView, thumbnailVideoView)
+        boostlingo.makeVideoCall(callRequest, this, this, this, primaryVideoView, thumbnailVideoView)
                 .subscribe(new SingleObserver<BLVideoCall>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -416,7 +452,9 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
 
     @Override
     public void onAudioTrackDisabled() {
-
+        // TODO: Interpreter has disabled the video. Show you privacy screen here
+        // Get the interpreter profile image URL
+        // String url = currentCall.getInterlocutorInfo().imageInfo.url(null);
     }
 
     @Override
@@ -427,5 +465,24 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
     @Override
     public void onVideoTrackDisabled() {
 
+    }
+
+    // Chat Listener
+    @Override
+    public void chatConnected() {
+
+    }
+
+    @Override
+    public void chatDisconnected() {
+
+    }
+
+    @Override
+    public void chatMessageReceived(ChatMessage message) {
+        runOnUiThread(() -> {
+            Snackbar.make(clRoot, "Chat Message Received: " + message.text,
+                    SNACKBAR_DURATION).show();
+        });
     }
 }

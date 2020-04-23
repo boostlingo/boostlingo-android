@@ -18,6 +18,16 @@
         android:orientation="vertical" >
 
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/chat_action_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:fabSize="mini"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:tint="@android:color/white"
+            android:src="@drawable/baseline_message_24" />
+
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/switch_camera_action_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
