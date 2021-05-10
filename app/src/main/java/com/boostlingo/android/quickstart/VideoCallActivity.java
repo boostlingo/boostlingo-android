@@ -9,16 +9,15 @@ import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.boostlingo.android.BLCall;
 import com.boostlingo.android.BLCallStateListener;
@@ -29,6 +28,8 @@ import com.boostlingo.android.BLVideoListener;
 import com.boostlingo.android.Boostlingo;
 import com.boostlingo.android.CallRequest;
 import com.boostlingo.android.ChatMessage;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.twilio.video.VideoView;
 
 import io.reactivex.CompletableObserver;
@@ -41,7 +42,6 @@ import static com.boostlingo.android.quickstart.MainActivity.BOOSTLINGO_REGION_E
 import static com.boostlingo.android.quickstart.MainActivity.CALL_ID_EXTRA;
 import static com.boostlingo.android.quickstart.MainActivity.CALL_ID_RESULT_CODE;
 import static com.boostlingo.android.quickstart.MainActivity.CALL_REQUEST_EXTRA;
-import static com.boostlingo.android.quickstart.MainActivity.SNACKBAR_DURATION;
 
 public class VideoCallActivity extends AppCompatActivity implements BLCallStateListener, BLVideoListener, BLChatListener {
 
@@ -54,8 +54,8 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
     private static final int CAMERA_MIC_PERMISSION_REQUEST_CODE = 1;
 
     private View clRoot;
-    private VideoView primaryVideoView;
-    private VideoView thumbnailVideoView;
+    private VideoView remoteVideoView;
+    private VideoView localVideoView;
     private FloatingActionButton switchCameraActionFab;
     private FloatingActionButton localVideoActionFab;
     private FloatingActionButton muteActionFab;
@@ -114,7 +114,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
                     updateUI(State.NO_CALL);
                     Snackbar.make(clRoot,
                             e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                            SNACKBAR_DURATION).show();
+                            Snackbar.LENGTH_LONG).show();
                 });
             }
         });
@@ -137,8 +137,8 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
         }
 
         clRoot = findViewById(R.id.cl_root);
-        primaryVideoView = findViewById(R.id.primary_video_view);
-        thumbnailVideoView = findViewById(R.id.thumbnail_video_view);
+        remoteVideoView = findViewById(R.id.primary_video_view);
+        localVideoView = findViewById(R.id.thumbnail_video_view);
         videoStatusTextView = findViewById(R.id.video_status_textview);
         
         switchCameraActionFab = findViewById(R.id.switch_camera_action_fab);
@@ -177,7 +177,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
                 public void onSuccess(ChatMessage message) {
                     runOnUiThread(() -> {
                         Snackbar.make(clRoot, "Success: Message sent",
-                                SNACKBAR_DURATION).show();
+                                Snackbar.LENGTH_LONG).show();
                     });
                 }
 
@@ -186,7 +186,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
                     runOnUiThread(() -> {
                         Snackbar.make(clRoot,
                                 e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                SNACKBAR_DURATION).show();
+                                Snackbar.LENGTH_LONG).show();
                     });
                 }
             });
@@ -212,7 +212,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
                         updateUI(State.NO_CALL);
                         Snackbar.make(clRoot,
                                 e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                SNACKBAR_DURATION).show();
+                                Snackbar.LENGTH_LONG).show();
                     });
                 }
             });
@@ -320,7 +320,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
 
     private void connectToRoom() {
         configureAudio(true);
-        boostlingo.makeVideoCall(callRequest, this, this, this, primaryVideoView, thumbnailVideoView)
+        boostlingo.makeVideoCall(callRequest, this, this, this, remoteVideoView, localVideoView)
                 .subscribe(new SingleObserver<BLVideoCall>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -341,7 +341,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
                             updateUI(State.NO_CALL);
                             Snackbar.make(clRoot,
                                     e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                    SNACKBAR_DURATION).show();
+                                    Snackbar.LENGTH_LONG).show();
                         });
                     }
                 });
@@ -409,7 +409,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
             updateUI(State.NO_CALL);
             Snackbar.make(clRoot,
                     e != null ? "Call did fail to connect with error: " + e.getLocalizedMessage() : "Call did fail to connect",
-                    SNACKBAR_DURATION).show();
+                    Snackbar.LENGTH_LONG).show();
         });
     }
 
@@ -421,7 +421,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
             updateUI(State.NO_CALL);
             Snackbar.make(clRoot,
                     e != null ? "Call did disconnect with error: " + e.getLocalizedMessage() : "Call did disconnect",
-                    SNACKBAR_DURATION).show();
+                    Snackbar.LENGTH_LONG).show();
         });
     }
 
@@ -482,7 +482,7 @@ public class VideoCallActivity extends AppCompatActivity implements BLCallStateL
     public void chatMessageReceived(ChatMessage message) {
         runOnUiThread(() -> {
             Snackbar.make(clRoot, "Chat Message Received: " + message.text,
-                    SNACKBAR_DURATION).show();
+                    Snackbar.LENGTH_LONG).show();
         });
     }
 }

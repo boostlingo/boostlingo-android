@@ -2,14 +2,14 @@ package com.boostlingo.android.quickstart;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatSpinner;
 import android.widget.ArrayAdapter;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.boostlingo.android.BLApiCallException;
 import com.boostlingo.android.BLLogLevel;
@@ -20,6 +20,7 @@ import com.boostlingo.android.CallRequest;
 import com.boostlingo.android.Gender;
 import com.boostlingo.android.Language;
 import com.boostlingo.android.ServiceType;
+import com.google.android.material.snackbar.Snackbar;
 
 import io.reactivex.CompletableObserver;
 import io.reactivex.SingleObserver;
@@ -39,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String BOOSTLINGO_AUTH_TOKEN_EXTRA = "BOOSTLINGO_AUTH_TOKEN_EXTRA";
     public static final String CALL_ID_EXTRA = "CALL_ID_EXTRA";
     public static final int CALL_ID_RESULT_CODE = 1;
-    public static final int SNACKBAR_DURATION = 4000;
-    private static final String TOKEN = <TOKEN>;
+    private static final String TOKEN = "TOKEN";
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Boostlingo boostlingo;
@@ -161,11 +161,11 @@ public class MainActivity extends AppCompatActivity {
                                 if (apiCallException != null) {
                                     Snackbar.make(clRoot,
                                             e != null ? "Error: " + apiCallException.getLocalizedMessage() + " StatusCode: " + apiCallException.getStatusCode() : "Error",
-                                            SNACKBAR_DURATION).show();
+                                            Snackbar.LENGTH_LONG).show();
                                 } else {
                                     Snackbar.make(clRoot,
                                             e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                            SNACKBAR_DURATION).show();
+                                            Snackbar.LENGTH_LONG).show();
                                 }
                             });
                         }
@@ -180,11 +180,11 @@ public class MainActivity extends AppCompatActivity {
                         if (apiCallException != null) {
                             Snackbar.make(clRoot,
                                     e != null ? "Error: " + apiCallException.getLocalizedMessage() + " StatusCode: " + apiCallException.getStatusCode() : "Error",
-                                    SNACKBAR_DURATION).show();
+                                    Snackbar.LENGTH_LONG).show();
                         } else {
                             Snackbar.make(clRoot,
                                     e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                    SNACKBAR_DURATION).show();
+                                    Snackbar.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -231,11 +231,11 @@ public class MainActivity extends AppCompatActivity {
                                 if (apiCallException != null) {
                                     Snackbar.make(clRoot,
                                             e != null ? "Error: " + apiCallException.getLocalizedMessage() + " StatusCode: " + apiCallException.getStatusCode() : "Error",
-                                            SNACKBAR_DURATION).show();
+                                            Snackbar.LENGTH_LONG).show();
                                 } else {
                                     Snackbar.make(clRoot,
                                             e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                            SNACKBAR_DURATION).show();
+                                            Snackbar.LENGTH_LONG).show();
                                 }
                             });
                         }
@@ -277,11 +277,11 @@ public class MainActivity extends AppCompatActivity {
                         if (apiCallException != null) {
                             Snackbar.make(clRoot,
                                     e != null ? "Error: " + apiCallException.getLocalizedMessage() + " StatusCode: " + apiCallException.getStatusCode() : "Error",
-                                    SNACKBAR_DURATION).show();
+                                    Snackbar.LENGTH_LONG).show();
                         } else {
                             Snackbar.make(clRoot,
                                     e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                    SNACKBAR_DURATION).show();
+                                    Snackbar.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
                         updateUI(State.AUTHENTICATED);
                         Snackbar.make(clRoot,
                                 "Duration: " + callDetails.duration,
-                                SNACKBAR_DURATION).show();
+                                Snackbar.LENGTH_LONG).show();
                     });
                 }
 
@@ -315,11 +315,11 @@ public class MainActivity extends AppCompatActivity {
                         if (apiCallException != null) {
                             Snackbar.make(clRoot,
                                     e != null ? "Error: " + apiCallException.getLocalizedMessage() + " StatusCode: " + apiCallException.getStatusCode() : "Error",
-                                    SNACKBAR_DURATION).show();
+                                    Snackbar.LENGTH_LONG).show();
                         } else {
                             Snackbar.make(clRoot,
                                     e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                    SNACKBAR_DURATION).show();
+                                    Snackbar.LENGTH_LONG).show();
                         }
                     });
                 }

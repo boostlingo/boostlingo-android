@@ -9,16 +9,16 @@ import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.SwitchCompat;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.boostlingo.android.BLCall;
 import com.boostlingo.android.BLCallStateListener;
@@ -28,6 +28,7 @@ import com.boostlingo.android.BLVoiceCall;
 import com.boostlingo.android.Boostlingo;
 import com.boostlingo.android.CallRequest;
 import com.boostlingo.android.ChatMessage;
+import com.google.android.material.snackbar.Snackbar;
 
 import io.reactivex.CompletableObserver;
 import io.reactivex.SingleObserver;
@@ -39,7 +40,6 @@ import static com.boostlingo.android.quickstart.MainActivity.BOOSTLINGO_REGION_E
 import static com.boostlingo.android.quickstart.MainActivity.CALL_ID_EXTRA;
 import static com.boostlingo.android.quickstart.MainActivity.CALL_ID_RESULT_CODE;
 import static com.boostlingo.android.quickstart.MainActivity.CALL_REQUEST_EXTRA;
-import static com.boostlingo.android.quickstart.MainActivity.SNACKBAR_DURATION;
 
 public class VoiceCallActivity extends AppCompatActivity implements BLCallStateListener, BLChatListener {
 
@@ -73,7 +73,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 Snackbar.make(clRoot,
                         R.string.permissions_needed,
-                        SNACKBAR_DURATION).show();
+                        Snackbar.LENGTH_LONG).show();
             } else {
                 makeCall();
             }
@@ -100,7 +100,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
                     updateUI(State.NO_CALL);
                     Snackbar.make(clRoot,
                             e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                            SNACKBAR_DURATION).show();
+                            Snackbar.LENGTH_LONG).show();
                 });
             }
         });
@@ -153,7 +153,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
                         updateUI(State.NO_CALL);
                         Snackbar.make(clRoot,
                                 e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                SNACKBAR_DURATION).show();
+                                Snackbar.LENGTH_LONG).show();
                     });
                 }
             });
@@ -171,7 +171,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
                 public void onSuccess(ChatMessage message) {
                     runOnUiThread(() -> {
                         Snackbar.make(clRoot, "Success: Message sent",
-                                SNACKBAR_DURATION).show();
+                                Snackbar.LENGTH_LONG).show();
                     });
                 }
 
@@ -180,7 +180,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
                     runOnUiThread(() -> {
                         Snackbar.make(clRoot,
                                 e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                SNACKBAR_DURATION).show();
+                                Snackbar.LENGTH_LONG).show();
                     });
                 }
             });
@@ -240,7 +240,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
                             updateUI(State.NO_CALL);
                             Snackbar.make(clRoot,
                                     e != null ? "Error: " + e.getLocalizedMessage() : "Error",
-                                    SNACKBAR_DURATION).show();
+                                    Snackbar.LENGTH_LONG).show();
                         });
                     }
                 });
@@ -255,7 +255,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
             Snackbar.make(clRoot,
                     "Microphone permissions needed. Please allow in your application settings.",
-                    SNACKBAR_DURATION).show();
+                    Snackbar.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(
                     this,
@@ -349,7 +349,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
             setAudioFocus(false);
             Snackbar.make(clRoot,
                     e != null ? "Call did fail to connect with error: " + e.getLocalizedMessage() : "Call did fail to connect",
-                    SNACKBAR_DURATION).show();
+                    Snackbar.LENGTH_LONG).show();
         });
     }
 
@@ -361,7 +361,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
             setAudioFocus(false);
             Snackbar.make(clRoot,
                     e != null ? "Call did disconnect with error: " + e.getLocalizedMessage() : "Call did disconnect",
-                    SNACKBAR_DURATION).show();
+                    Snackbar.LENGTH_LONG).show();
         });
     }
 
@@ -380,7 +380,7 @@ public class VoiceCallActivity extends AppCompatActivity implements BLCallStateL
     public void chatMessageReceived(ChatMessage message) {
         runOnUiThread(() -> {
             Snackbar.make(clRoot, "Chat Message Received: " + message.text,
-                    SNACKBAR_DURATION).show();
+                    Snackbar.LENGTH_LONG).show();
         });
     }
 }
