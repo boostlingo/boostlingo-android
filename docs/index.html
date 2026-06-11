@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Boostlingo Android SDK</title>
+    <link href="images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="scripts/sourceset_dependencies.js" async="async"></script>
+<link href="styles/style.css" rel="Stylesheet">
+<link href="styles/main.css" rel="Stylesheet">
+<link href="styles/prism.css" rel="Stylesheet">
+<link href="styles/logo-styles.css" rel="Stylesheet">
+<link href="ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="index.html" tabindex="1">
+                    Boostlingo Android SDK
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":boostlingo/release">release</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":boostlingo/release"
+                                       data-filter=":boostlingo/release"/>
+                                <span class="checkbox--icon"></span>
+                                release
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Boostlingo Android SDK
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" id="content" pageIds="Boostlingo Android SDK::////PointingToDeclaration//-1083108478">
+  <div class="breadcrumbs"></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Boostlingo</span></span> <span><span>Android</span></span> <span><span>SDK</span></span></h1>
+    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><p class="paragraph">The Boostlingo Android library enables developers to embed the Boostlingo caller directly into their own applications. This can then be used for placing calls in the Boostlingo platform.</p><h2 class="">Getting Started</h2><p class="paragraph">In order to place calls in Boostlingo, you must have a requestor account. You can then embed Boostlingo into your application, request a Boostlingo API token from your server, and start making calls.</p><h2 class="">Installation</h2><h3 class="">AAR</h3><p class="paragraph">The SDK is distributed as a prebuilt AAR. <a href="https://github.com/boostlingo/boostlingo-android/releases">Download</a> the latest <code class="lang-kotlin">boostlingo-release.aar</code> from the releases page and put it into your app's <code class="lang-kotlin">/libs</code> folder.</p><blockquote class="quotation"><p class="paragraph">Requires <code class="lang-kotlin">minSdk 23</code> or higher in the consuming app.</p></blockquote><p class="paragraph">Because a bare AAR carries no dependency metadata, you must also declare every transitive dependency yourself. Add the following to your app module's <code class="lang-kotlin">build.gradle.kts</code> (versions match the SDK build — see gradle/libs.versions.toml):</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">dependencies {<br>    // Boostlingo<br>    implementation(fileTree(mapOf(&quot;dir&quot; to &quot;libs&quot;, &quot;include&quot; to listOf(&quot;*.aar&quot;))))<br><br>    // SignalR<br>    implementation(&quot;com.microsoft.signalr:signalr:10.0.8&quot;)<br><br>    // Rx<br>    implementation(&quot;io.reactivex.rxjava3:rxkotlin:3.0.1&quot;)<br>    implementation(&quot;io.reactivex.rxjava3:rxandroid:3.0.2&quot;)<br><br>    // Retrofit<br>    implementation(&quot;com.squareup.retrofit2:retrofit:3.0.0&quot;)<br>    implementation(&quot;com.squareup.retrofit2:adapter-rxjava3:3.0.0&quot;)<br>    implementation(&quot;com.squareup.retrofit2:converter-gson:3.0.0&quot;)<br><br>    // OkHttp<br>    implementation(&quot;com.squareup.okhttp3:okhttp:5.3.2&quot;)<br>    implementation(&quot;com.squareup.okhttp3:logging-interceptor:5.3.2&quot;)<br><br>    // Twilio<br>    implementation(&quot;com.twilio:voice-android:6.10.3&quot;)<br>    implementation(&quot;com.twilio:video-android-ktx:7.10.4&quot;)<br>    implementation(&quot;com.twilio:audioswitch:1.2.5&quot;)<br>}</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><blockquote class="quotation"><p class="paragraph">If your app still uses a Groovy <code class="lang-kotlin">build.gradle</code>, the equivalent is <code class="lang-kotlin">implementation fileTree(dir: 'libs', include: ['*.aar'])</code> plus <code class="lang-kotlin">implementation 'group:artifact:version'</code> lines for each dependency above.</p></blockquote><h2 class="">Usage</h2><p class="paragraph">These steps will guide you through the basic process of placing calls through Boostlingo.</p><h3 class="">Request Boostlingo authentication token</h3><p class="paragraph">First step is to obtain a boostlingo authentication token from your server.  Never store an API token or username/password in your front end/mobile code.  Your server should be the one that logs the user in, obtains the authentication token, and passes it back down to the web application.</p><h3 class="">Obtain Boostlingo authentication token via API endpoint</h3><div class="sample-container"><pre><code class="block lang-json" theme="idea">POST https://app.boostlingo.com/api/web/account/signin</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><p class="paragraph">Request Model</p><div class="sample-container"><pre><code class="block lang-json" theme="idea">{<br>&quot;email&quot;: &quot;&lt;string&gt;&quot;,<br>&quot;password&quot;: &quot;&lt;string&gt;&quot;<br>}</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><p class="paragraph">Response Model <code class="lang-kotlin">token</code> is what will be needed by the boostlingo sdk</p><div class="sample-container"><pre><code class="block lang-json" theme="idea">{<br>&quot;userAccountId&quot;: &quot;&lt;integer&gt;&quot;,<br>&quot;refreshToken&quot;: &quot;&lt;string&gt;&quot;,<br>&quot;role&quot;: &quot;&lt;string&gt;&quot;,<br>&quot;token&quot;: &quot;&lt;string&gt;&quot;,<br>&quot;companyAccountId&quot;: &quot;&lt;integer&gt;&quot;<br>}</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><h3 class="">Quickstart</h3><p class="paragraph">This is a working example that will demonstrate how to Boostlingo calls.</p><p class="paragraph">Enter your TOKEN in the token field, as well as your REGION in the region field.</p><h3 class="">Create instance of Boostlingo class and load dictionaries</h3><p class="paragraph">We recommend you do this only once. The Boostlingo library will cache specific data and create instances of classes that do not need to be refreshed very frequently. The next step is typically to pull down the call dictionaries. Whether you expose these directly or are just mapping languages and service types with your internal types, loading these lists will almost definitely be required.</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val boostlingoSdk: BoostlingoSDK by lazy {<br>    BoostlingoSDK(<br>        authToken,<br>        this,<br>        BLLogLevel.DEBUG,<br>        region<br>    )<br>}<br><br>boostlingoSdk.initialize()<br>    .subscribeOn(Schedulers.io())<br>    .andThen(<br>        boostlingoSdk.getCallDictionaries()<br>            .subscribeOn(Schedulers.io())<br>    )<br>    .observeOn(AndroidSchedulers.mainThread())<br>    .doOnSubscribe { updateUI(State.LOADING) }<br>    .subscribe(<br>        { callDictionaries -&gt;<br>            updateUI(State.INIT)<br>            binding.languageToTextView.text = callDictionaries.languages.first { language -&gt; language.id == 1 }.englishName<br>            binding.languageFromTextView.text = callDictionaries.languages.first { language -&gt; language.id == 4 }.englishName<br>            binding.serviceTypeTextView.text = callDictionaries.serviceTypes.first { language -&gt; language.id == 1 }.name<br>            binding.genderTextView.text = callDictionaries.genders.first().name<br>        },<br>        {<br>            updateUI(State.NOT_INIT)<br>            val httpException = it as? HttpException<br>            if (httpException != null) {<br>                Snackbar.make(<br>                    binding.rootView,<br>                    &quot;Error: &quot; + httpException.localizedMessage + &quot; StatusCode: &quot; + httpException.code(),<br>                    Snackbar.LENGTH_LONG<br>                ).show()<br>            } else {<br>                Snackbar.make(<br>                    binding.rootView,<br>                    &quot;Error: &quot; + it.localizedMessage,<br>                    Snackbar.LENGTH_LONG<br>                ).show()<br>            }<br>        }<br>    )<br>    .let { compositeDisposable.add(it) }</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><h3 class="">Handling BLCallEvent</h3><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">private fun subscribeToCallEvent() {<br>    boostlingoSdk.callEventObservable<br>        .subscribeOn(AndroidSchedulers.mainThread())<br>        .observeOn(AndroidSchedulers.mainThread())<br>        .subscribe(<br>            ::handleCallEvent,<br>            ::handleError<br>        )<br>        .let { compositeDisposable.add(it) }<br>}<br><br>private fun handleCallEvent(callEvent: BLCallEvent) {<br>    when (callEvent) {<br>        is BLCallEvent.CallConnected -&gt; {<br>            Log.d(null, &quot;BLCallEvent.CallConnected&quot;)<br>            audioSwitch.activate()<br>            currentCall = callEvent.call as BLVideoCall<br>            updateUI(State.IN_PROGRESS)<br><br>            Log.d(null, &quot;Participants: ${callEvent.call.participants.count()}&quot;)<br>            callEvent.call<br>                .participants<br>                .firstOrNull()<br>                ?.let {<br>                    currentCall?.addRenderer(it.identity, binding.primaryVideoView)<br>                }<br>        }<br>        is BLCallEvent.CallDisconnected -&gt; {<br>            Log.d(null, &quot;BLCallEvent.CallDisconnected&quot;)<br>            audioSwitch.deactivate()<br>            currentCall = null<br>            updateUI(State.NO_CALL)<br>            Snackbar.make(<br>                binding.rootView,<br>                &quot;Call did disconnect with error: &quot; + callEvent.e?.localizedMessage,<br>                Snackbar.LENGTH_LONG<br>            ).show()<br>        }<br>        is BLCallEvent.CallFailedToConnect -&gt; {<br>            Log.d(null, &quot;BLCallEvent.CallFailedToConnect&quot;)<br>            audioSwitch.deactivate()<br>            currentCall = null<br>            updateUI(State.NO_CALL)<br>            Snackbar.make(<br>                binding.rootView,<br>                &quot;Call did fail to connect with error: &quot; + callEvent.e?.localizedMessage,<br>                Snackbar.LENGTH_LONG<br>            ).show()<br>        }<br>        BLCallEvent.ChatConnected -&gt; {<br>            Log.d(null, &quot;BLCallEvent.ChatConnected&quot;)<br>        }<br>        BLCallEvent.ChatDisconnected -&gt; {<br>            Log.d(null, &quot;BLCallEvent.ChatDisconnected&quot;)<br>        }<br>        is BLCallEvent.ChatMessageReceived -&gt; {<br>            Log.d(null, &quot;BLCallEvent.ChatMessageReceived: ${callEvent.message}&quot;)<br>        }<br>        is BLCallEvent.ParticipantAdded -&gt; {<br>            Log.d(null, &quot;BLCallEvent.ParticipantAdded ${callEvent.participant.accountId}&quot;)<br>            Log.d(null, &quot;Participants: ${callEvent.call.participants.count()}&quot;)<br>            callEvent.participant<br>                .let {<br>                    currentCall?.addRenderer(it.identity, binding.primaryVideoView)<br>                }<br>        }<br>        is BLCallEvent.ParticipantRemoved -&gt; {<br>            Log.d(null, &quot;BLCallEvent.ParticipantUpdated: &quot; + callEvent.participant.accountId)<br>        }<br>        is BLCallEvent.ParticipantUpdated -&gt; {<br>            Log.d(null, &quot;BLCallEvent.ParticipantUpdated: &quot; + callEvent.participant.accountId)<br>        }<br>    }<br>}<br><br>private fun handleError(t: Throwable) {<br>    updateUI(State.NO_CALL)<br>    Snackbar.make(<br>        binding.rootView,<br>        &quot;Error: &quot; + t.localizedMessage,<br>        Snackbar.LENGTH_LONG<br>    ).show()<br>}</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><h3 class="">Placing a call</h3><p class="paragraph">Before placing a call you will need to check <code class="lang-kotlin">Manifest.permission.CAMERA</code>, <code class="lang-kotlin">Manifest.permission.RECORD_AUDIO</code> and <code class="lang-kotlin">Manifest.permission.BLUETOOTH_CONNECT</code> permissions and activate <code class="lang-kotlin">com.twilio.audioswitch.AudioSwitch</code></p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">private fun makeCall() {<br>    val callRequest = CallRequest(<br>        languageFromId = 4,<br>        languageToId = 1,<br>        serviceTypeId = 1,<br>        genderId = null,<br>        data = listOf(<br>            AdditionalField(<br>                key = &quot;MyInternalId&quot;,<br>                value = &quot;1984&quot;<br>            ),<br>            AdditionalField(<br>                key = &quot;CustomCallField&quot;,<br>                value = &quot;CustomCallFieldValue&quot;<br>            )<br>        ),<br>        isVideo = false<br>    )<br><br>    boostlingoSdk.makeVoiceCall(callRequest)<br>        .subscribeOn(AndroidSchedulers.mainThread())<br>        .observeOn(AndroidSchedulers.mainThread())<br>        .doOnSubscribe { updateUI(State.CALLING) }<br>        .subscribe(<br>            {<br>                currentCall = it<br>            },<br>            ::handleError<br>        )<br>        .let { compositeDisposable.add(it) }<br>}<br><br>private fun makeCall() {<br>    val callRequest = CallRequest(<br>        languageFromId = 4,<br>        languageToId = 1,<br>        serviceTypeId = 1,<br>        genderId = null,<br>        data = listOf(<br>            AdditionalField(<br>                key = &quot;MyInternalId&quot;,<br>                value = &quot;1984&quot;<br>            ),<br>            AdditionalField(<br>                key = &quot;CustomCallField&quot;,<br>                value = &quot;CustomCallFieldValue&quot;<br>            )<br>        ),<br>        isVideo = true<br>    )<br><br>    boostlingoSdk.makeVideoCall(<br>        callRequest,<br>        binding.thumbnailVideoView<br>    )<br>        .subscribeOn(AndroidSchedulers.mainThread())<br>        .observeOn(AndroidSchedulers.mainThread())<br>        .doOnSubscribe { updateUI(State.CALLING) }<br>        .subscribe(<br>            {<br>                currentCall = it<br>            },<br>            ::handleError<br>        )<br>}</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><h3 class="">Adding a video participant renderer</h3><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">is BLCallEvent.ParticipantAdded -&gt; {<br>    Log.d(null, &quot;BLCallEvent.ParticipantAdded ${callEvent.participant.accountId}&quot;)<br>    Log.d(null, &quot;Participants: ${callEvent.call.participants.count()}&quot;)<br>    callEvent.participant<br>        .let {<br>            currentCall?.addRenderer(it.identity, binding.primaryVideoView)<br>        }<br>}</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><h3 class="">Sending a chat message</h3><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">boostlingoSdk.sendChatMessage(&quot;TEST&quot;)<br>    .subscribeOn(AndroidSchedulers.mainThread())<br>    .observeOn(AndroidSchedulers.mainThread())<br>    .subscribe(<br>        {<br>            Snackbar.make(<br>                binding.rootView,<br>                &quot;Chat message sent: &quot; + it.text,<br>                Snackbar.LENGTH_LONG<br>            ).show()<br>        },<br>        ::handleError<br>    )<br>    .let { compositeDisposable.add(it) }<br><br>is BLCallEvent.ChatMessageReceived -&gt; {<br>    Log.d(null, &quot;BLCallEvent.ChatMessageReceived: ${callEvent.message}&quot;)<br>}</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><h3 class="">Dialing a third-party participant</h3><p class="paragraph">Getting requestor profile image url.</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">currentCall.dialThirdParty(&quot;18004444444&quot;)<br>    .subscribeOn(AndroidSchedulers.mainThread())<br>    .observeOn(AndroidSchedulers.mainThread())<br>    .subscribe(<br>        {<br>            Log.d(null, &quot;dialThirdParty success&quot;)<br>        },<br>        {<br>            Log.d(null, it.localizedMessage.orEmpty())<br>        }<br>    )<br>    .let { compositeDisposable.add(it) }</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><h2 class="">More Documentation</h2><p class="paragraph">You can find more documentation and useful information below:</p><ul><li><p class="paragraph"><a href="https://github.com/boostlingo/boostlingo-android/tree/main">Quickstart</a></p></li><li><p class="paragraph"><a href="https://boostlingo.github.io/boostlingo-android/">Doc</a></p></li></ul></div></div>
+  </div>
+  <h2 class="">Packages</h2>
+  <div class="table"><a data-name="-1273865370%2FPackages%2F-1083108478" anchor-label="com.boostlingo.android" id="-1273865370%2FPackages%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="-boostlingo -android -s-d-k/com.boostlingo.android/index.html">com.boostlingo.android</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1273865370%2FPackages%2F-1083108478"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">release</div>
+            </div>
+          </div>
+        </div>
+        <div><span class="brief-comment"><a data-name="-1273865370%2FPackages%2F-1083108478" anchor-label="com.boostlingo.android" id="-1273865370%2FPackages%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+            <p class="paragraph">Boostlingo SDK package.</p>
+          </span></div>
+      </div>
+    </div>
+<a data-name="1967160320%2FPackages%2F-1083108478" anchor-label="com.boostlingo.android.data.dto.customForm" id="1967160320%2FPackages%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="-boostlingo -android -s-d-k/com.boostlingo.android.data.dto.customForm/index.html">com.boostlingo.android.data.dto.customForm</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1967160320%2FPackages%2F-1083108478"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">release</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-2026025283%2FPackages%2F-1083108478" anchor-label="com.boostlingo.android.data.mapper" id="-2026025283%2FPackages%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="-boostlingo -android -s-d-k/com.boostlingo.android.data.mapper/index.html">com.boostlingo.android.data.mapper</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2026025283%2FPackages%2F-1083108478"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">release</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="-190223841%2FPackages%2F-1083108478" anchor-label="com.boostlingo.android.domain.models.precall" id="-190223841%2FPackages%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="-boostlingo -android -s-d-k/com.boostlingo.android.domain.models.precall/index.html">com.boostlingo.android.domain.models.precall</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-190223841%2FPackages%2F-1083108478"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">release</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

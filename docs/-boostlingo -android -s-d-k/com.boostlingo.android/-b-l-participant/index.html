@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>BLParticipant</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    Boostlingo Android SDK
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":boostlingo/release">release</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":boostlingo/release"
+                                       data-filter=":boostlingo/release"/>
+                                <span class="checkbox--icon"></span>
+                                release
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Boostlingo Android SDK
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Boostlingo Android SDK::com.boostlingo.android/BLParticipant///PointingToDeclaration//-1083108478">
+  <div class="breadcrumbs"><a href="../../../index.html">Boostlingo Android SDK</a><span class="delimiter">/</span><a href="../index.html">com.boostlingo.android</a><span class="delimiter">/</span><span class="current">BLParticipant</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>BLParticipant</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword"></span><span class="token keyword">class </span><a href="index.html">BLParticipant</a></div><p class="paragraph">The <i>BLParticipant</i> struct represents a <i>BLCall</i> participant information.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-309733626%2FProperties%2F-1083108478" anchor-label="accountId" id="-309733626%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-309733626%2FProperties%2F-1083108478"><span>account</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-309733626%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Long.html">Long</a> <a href="index.html#-309733626%2FProperties%2F-1083108478">accountId</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-478173626%2FProperties%2F-1083108478" anchor-label="companyName" id="-478173626%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-478173626%2FProperties%2F-1083108478"><span>company</span><wbr></wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-478173626%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a> <a href="index.html#-478173626%2FProperties%2F-1083108478">companyName</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-278077394%2FProperties%2F-1083108478" anchor-label="identity" id="-278077394%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-278077394%2FProperties%2F-1083108478"><span><span>identity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-278077394%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a> <a href="index.html#-278077394%2FProperties%2F-1083108478">identity</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-208201307%2FProperties%2F-1083108478" anchor-label="imageInfo" id="-208201307%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-208201307%2FProperties%2F-1083108478"><span>image</span><wbr></wbr><span><span>Info</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-208201307%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="../-image-info/index.html">ImageInfo</a> <a href="index.html#-208201307%2FProperties%2F-1083108478">imageInfo</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2001724233%2FProperties%2F-1083108478" anchor-label="isAudioEnabled" id="-2001724233%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-2001724233%2FProperties%2F-1083108478"><span>is</span><wbr></wbr><span>Audio</span><wbr></wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2001724233%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Boolean.html">Boolean</a> <a href="index.html#-2001724233%2FProperties%2F-1083108478">isAudioEnabled</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1107377828%2FProperties%2F-1083108478" anchor-label="isVideoEnabled" id="-1107377828%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1107377828%2FProperties%2F-1083108478"><span>is</span><wbr></wbr><span>Video</span><wbr></wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1107377828%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Boolean.html">Boolean</a> <a href="index.html#-1107377828%2FProperties%2F-1083108478">isVideoEnabled</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1278694362%2FProperties%2F-1083108478" anchor-label="muteActionIsEnabled" id="-1278694362%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1278694362%2FProperties%2F-1083108478"><span>mute</span><wbr></wbr><span>Action</span><wbr></wbr><span>Is</span><wbr></wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1278694362%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Boolean.html">Boolean</a> <a href="index.html#-1278694362%2FProperties%2F-1083108478">muteActionIsEnabled</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="8451329%2FProperties%2F-1083108478" anchor-label="participantType" id="8451329%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#8451329%2FProperties%2F-1083108478"><span>participant</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="8451329%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="../-b-l-participant-type/index.html">BLParticipantType</a> <a href="index.html#8451329%2FProperties%2F-1083108478">participantType</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-817031185%2FProperties%2F-1083108478" anchor-label="rating" id="-817031185%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-817031185%2FProperties%2F-1083108478"><span><span>rating</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-817031185%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Double.html">Double</a> <a href="index.html#-817031185%2FProperties%2F-1083108478">rating</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1121795247%2FProperties%2F-1083108478" anchor-label="removeActionIsEnabled" id="-1121795247%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1121795247%2FProperties%2F-1083108478"><span>remove</span><wbr></wbr><span>Action</span><wbr></wbr><span>Is</span><wbr></wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1121795247%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Boolean.html">Boolean</a> <a href="index.html#-1121795247%2FProperties%2F-1083108478">removeActionIsEnabled</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="625013794%2FProperties%2F-1083108478" anchor-label="requiredName" id="625013794%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#625013794%2FProperties%2F-1083108478"><span>required</span><wbr></wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="625013794%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a> <a href="index.html#625013794%2FProperties%2F-1083108478">requiredName</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-148256963%2FProperties%2F-1083108478" anchor-label="state" id="-148256963%2FProperties%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-148256963%2FProperties%2F-1083108478"><span><span>state</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-148256963%2FProperties%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">private </span><span class="token keyword">final </span><a href="../-b-l-participant-state/index.html">BLParticipantState</a> <a href="index.html#-148256963%2FProperties%2F-1083108478">state</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-32586118%2FFunctions%2F-1083108478" anchor-label="getAccountId" id="-32586118%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-account-id.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-32586118%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Long.html">Long</a> <a href="get-account-id.html"><span class="token function">getAccountId</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-427390790%2FFunctions%2F-1083108478" anchor-label="getCompanyName" id="-427390790%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-company-name.html"><span>get</span><wbr></wbr><span>Company</span><wbr></wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-427390790%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a> <a href="get-company-name.html"><span class="token function">getCompanyName</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1670525498%2FFunctions%2F-1083108478" anchor-label="getIdentity" id="1670525498%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-identity.html"><span>get</span><wbr></wbr><span><span>Identity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1670525498%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a> <a href="get-identity.html"><span class="token function">getIdentity</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="68946201%2FFunctions%2F-1083108478" anchor-label="getImageInfo" id="68946201%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-image-info.html"><span>get</span><wbr></wbr><span>Image</span><wbr></wbr><span><span>Info</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="68946201%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="../-image-info/index.html">ImageInfo</a> <a href="get-image-info.html"><span class="token function">getImageInfo</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-372254054%2FFunctions%2F-1083108478" anchor-label="getMuteActionIsEnabled" id="-372254054%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-mute-action-is-enabled.html"><span>get</span><wbr></wbr><span>Mute</span><wbr></wbr><span>Action</span><wbr></wbr><span>Is</span><wbr></wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-372254054%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Boolean.html">Boolean</a> <a href="get-mute-action-is-enabled.html"><span class="token function">getMuteActionIsEnabled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2018935435%2FFunctions%2F-1083108478" anchor-label="getParticipantType" id="-2018935435%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-participant-type.html"><span>get</span><wbr></wbr><span>Participant</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2018935435%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="../-b-l-participant-type/index.html">BLParticipantType</a> <a href="get-participant-type.html"><span class="token function">getParticipantType</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-461931269%2FFunctions%2F-1083108478" anchor-label="getRating" id="-461931269%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-rating.html"><span>get</span><wbr></wbr><span><span>Rating</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-461931269%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Double.html">Double</a> <a href="get-rating.html"><span class="token function">getRating</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1911020347%2FFunctions%2F-1083108478" anchor-label="getRemoveActionIsEnabled" id="-1911020347%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-remove-action-is-enabled.html"><span>get</span><wbr></wbr><span>Remove</span><wbr></wbr><span>Action</span><wbr></wbr><span>Is</span><wbr></wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1911020347%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Boolean.html">Boolean</a> <a href="get-remove-action-is-enabled.html"><span class="token function">getRemoveActionIsEnabled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2095685586%2FFunctions%2F-1083108478" anchor-label="getRequiredName" id="-2095685586%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-required-name.html"><span>get</span><wbr></wbr><span>Required</span><wbr></wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2095685586%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a> <a href="get-required-name.html"><span class="token function">getRequiredName</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-136802127%2FFunctions%2F-1083108478" anchor-label="getState" id="-136802127%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-state.html"><span>get</span><wbr></wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-136802127%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="../-b-l-participant-state/index.html">BLParticipantState</a> <a href="get-state.html"><span class="token function">getState</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2001724233%2FFunctions%2F-1083108478" anchor-label="isAudioEnabled" id="-2001724233%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-audio-enabled.html"><span>is</span><wbr></wbr><span>Audio</span><wbr></wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2001724233%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Boolean.html">Boolean</a> <a href="is-audio-enabled.html"><span class="token function">isAudioEnabled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1107377828%2FFunctions%2F-1083108478" anchor-label="isVideoEnabled" id="-1107377828%2FFunctions%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-video-enabled.html"><span>is</span><wbr></wbr><span>Video</span><wbr></wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1107377828%2FFunctions%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace block"><span class="token keyword">public </span><span class="token keyword">final </span><a href="https://developer.android.com/reference/kotlin/java/lang/Boolean.html">Boolean</a> <a href="is-video-enabled.html"><span class="token function">isVideoEnabled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
