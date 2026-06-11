@@ -1,264 +1,138 @@
 package com.boostlingo.android.quickstart
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.media.AudioManager
 import android.os.Build
-import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.util.Log
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.requestPermissions
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.boostlingo.android.*
-import com.boostlingo.android.quickstart.MainActivity.Companion.AUTH_TOKEN_EXTRA
-import com.boostlingo.android.quickstart.MainActivity.Companion.CALL_REQUEST_EXTRA
-import com.boostlingo.android.quickstart.MainActivity.Companion.REGION_EXTRA
-import com.boostlingo.android.quickstart.databinding.ActivityVoiceBinding
-import com.google.android.material.snackbar.Snackbar
+import com.boostlingo.android.quickstart.ui.theme.BoostlingoTheme
 import com.twilio.audioswitch.AudioDevice
 import com.twilio.audioswitch.AudioSwitch
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
-class VoiceActivity : AppCompatActivity() {
+class VoiceActivity : ComponentActivity() {
+
+    private enum class State { NO_CALL, CALLING, IN_PROGRESS }
 
     private lateinit var callRequest: CallRequest
     private lateinit var region: String
     private lateinit var token: String
 
-    private val binding: ActivityVoiceBinding by lazy {
-        ActivityVoiceBinding.inflate(layoutInflater)
-    }
-
     private val boostlingoSdk: BoostlingoSDK by lazy {
-        BoostlingoSDK(
-            token,
-            this,
-            BLLogLevel.DEBUG,
-            region
-        )
+        BoostlingoSDK(token, this, BLLogLevel.DEBUG, region)
     }
 
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
     private var currentCall: BLVoiceCall? = null
     private var audioSwitch: AudioSwitch? = null
     private var savedVolumeControlStream = 0
 
+    // --- Compose-observable UI state ---
+    private var status by mutableStateOf("No active call")
+    private var controlsEnabled by mutableStateOf(false)
+    private var muteChecked by mutableStateOf(false)
+    private var speakerChecked by mutableStateOf(false)
+    private var message by mutableStateOf<String?>(null)
+
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { grants ->
+        if (grants[Manifest.permission.RECORD_AUDIO] == true) {
+            startAudioSwitch()
+            makeCall()
+        } else {
+            message = "Microphone permission needed. Please allow in your application settings."
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (intent.hasExtra(CALL_REQUEST_EXTRA)) {
-            callRequest = intent.getParcelableExtra(CALL_REQUEST_EXTRA)!!
-            region = intent.getStringExtra(REGION_EXTRA)!!
-            token = intent.getStringExtra(AUTH_TOKEN_EXTRA)!!
+        if (intent.hasExtra(MainActivity.CALL_REQUEST_EXTRA)) {
+            callRequest = intent.getParcelableExtra(MainActivity.CALL_REQUEST_EXTRA)!!
+            region = intent.getStringExtra(MainActivity.REGION_EXTRA)!!
+            token = intent.getStringExtra(MainActivity.AUTH_TOKEN_EXTRA)!!
         }
 
-        setContentView(binding.root)
+        setContent {
+            BoostlingoTheme {
+                CallControlsScreen(
+                    title = "Voice Call",
+                    status = status,
+                    controlsEnabled = controlsEnabled,
+                    muteChecked = muteChecked,
+                    onMuteChange = { muteChecked = it; currentCall?.isMuted = it },
+                    speakerChecked = speakerChecked,
+                    onSpeakerChange = { speakerChecked = it; toggleSpeaker() },
+                    onHangUp = ::hangUp,
+                    onSendTestMessage = ::sendTestMessage,
+                    onDialThirdParty = ::dialThirdParty,
+                    onMuteThirdParty = ::muteThirdParty,
+                    onHangUpThirdParty = ::hangUpThirdParty,
+                    message = message,
+                    onMessageShown = { message = null },
+                )
+            }
+        }
 
         boostlingoSdk.callEventObservable
             .subscribeOn(AndroidSchedulers.mainThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                ::handleCallEvent,
-                ::handleError
-            )
+            .subscribe(::handleCallEvent, ::handleError)
             .let { compositeDisposable.add(it) }
 
-        binding.muteSwitch
-            .setOnCheckedChangeListener { _, b ->
-                currentCall?.isMuted = b
-            }
+        audioSwitch = AudioSwitch(applicationContext)
+        savedVolumeControlStream = volumeControlStream
+        volumeControlStream = AudioManager.STREAM_VOICE_CALL
 
-        binding.speakerSwitch
-            .setOnCheckedChangeListener { _, _ ->
-                if (audioSwitch?.selectedAudioDevice is AudioDevice.Earpiece) {
-                    audioSwitch?.selectDevice(
-                        audioSwitch?.availableAudioDevices?.firstOrNull {
-                            it is AudioDevice.Speakerphone
-                        }
-                    )
-                } else {
-                    audioSwitch?.selectDevice(
-                        audioSwitch?.availableAudioDevices?.firstOrNull {
-                            it is AudioDevice.Earpiece
-                        }
-                    )
-                }
-            }
-
-        binding.hangupButton
-            .setOnClickListener {
-                boostlingoSdk.hangUp()
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        {
-                            updateUI(State.NO_CALL)
-                        },
-                        ::handleError
-                    )
-                    .let { compositeDisposable.add(it) }
-            }
-
-        binding.chatButton
-            .setOnClickListener {
-                boostlingoSdk.sendChatMessage("TEST")
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        {
-                            Snackbar.make(
-                                binding.rootView,
-                                "Chat message sent: " + it.text,
-                                Snackbar.LENGTH_LONG
-                            ).show()
-                        },
-                        ::handleError
-                    )
-                    .let { compositeDisposable.add(it) }
-            }
-
-        binding.dialThirdPartyButton
-            .setOnClickListener {
-                currentCall?.dialThirdParty("18004444444")
-                    ?.subscribeOn(AndroidSchedulers.mainThread())
-                    ?.observeOn(AndroidSchedulers.mainThread())
-                    ?.subscribe(
-                        {
-                            Log.d(null, "dialThirdParty success")
-                        },
-                        {
-                            Log.d(null, it.localizedMessage.orEmpty())
-                        }
-                    )
-                    ?.let { compositeDisposable.add(it) }
-            }
-
-        binding.muteThirdPartyButton
-            .setOnClickListener {
-                currentCall?.participants
-                    ?.firstOrNull { it.participantType == BLParticipantType.THIRD_PARTY }
-                    ?.let {
-                        currentCall?.muteThirdPartyParticipant(it.identity, it.isAudioEnabled)
-                            ?.subscribeOn(AndroidSchedulers.mainThread())
-                            ?.observeOn(AndroidSchedulers.mainThread())
-                            ?.subscribe(
-                                {
-                                    Log.d(null, "muteThirdPartyParticipant success")
-                                },
-                                {
-                                    Log.d(null, it.localizedMessage.orEmpty())
-                                }
-                            )
-                            ?.let { compositeDisposable.add(it) }
-                    }
-            }
-
-        binding.hangUpThirdPartyButton
-            .setOnClickListener {
-                currentCall?.participants
-                    ?.firstOrNull { it.participantType == BLParticipantType.THIRD_PARTY }
-                    ?.let {
-                        currentCall?.hangupThirdPartyParticipant(it.identity)
-                            ?.subscribeOn(AndroidSchedulers.mainThread())
-                            ?.observeOn(AndroidSchedulers.mainThread())
-                            ?.subscribe(
-                                {
-                                    Log.d(null, "hangupThirdPartyParticipant success")
-                                },
-                                {
-                                    Log.d(null, it.localizedMessage.orEmpty())
-                                }
-                            )
-                            ?.let { compositeDisposable.add(it) }
-                    }
-            }
-
-        /*
-         * Ensure required permissions are enabled
-         */
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
-            if (!hasPermissions(this, Manifest.permission.RECORD_AUDIO,
-                    Manifest.permission.BLUETOOTH_CONNECT)) {
-                requestPermissionForMicrophoneAndBluetooth()
-            } else {
-                startAudioSwitch()
-                makeCall()
-            }
-        } else {
-            if (!hasPermissions(this, Manifest.permission.RECORD_AUDIO)) {
-                requestPermissionForMicrophone()
-            } else {
-                startAudioSwitch()
-                makeCall()
-            }
-        }
-
-        /*
-         * Setup audio device management and set the volume control stream
-         */
-        audioSwitch = AudioSwitch(applicationContext);
-        savedVolumeControlStream = volumeControlStream;
-        volumeControlStream = AudioManager.STREAM_VOICE_CALL;
-
-        updateUI(State.NO_CALL);
+        ensurePermissionsThenCall()
     }
 
-    private fun requestPermissionForMicrophone() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                this,
-                Manifest.permission.RECORD_AUDIO
-            )
-        ) {
-            Snackbar.make(
-                binding.rootView,
-                "Microphone permissions needed. Please allow in your application settings.",
-                Snackbar.LENGTH_LONG
-            ).show()
-        } else {
-            requestPermissions(
-                this, arrayOf(Manifest.permission.RECORD_AUDIO),
-                MIC_PERMISSION_REQUEST_CODE
-            )
+    private fun ensurePermissionsThenCall() {
+        val needed = buildList {
+            add(Manifest.permission.RECORD_AUDIO)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) add(Manifest.permission.BLUETOOTH_CONNECT)
         }
-    }
-
-    @RequiresApi(api = VERSION_CODES.M)
-    private fun requestPermissionForMicrophoneAndBluetooth() {
-        if (!hasPermissions(
-                this, Manifest.permission.RECORD_AUDIO,
-                Manifest.permission.BLUETOOTH_CONNECT
-            )
-        ) {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.RECORD_AUDIO,
-                    Manifest.permission.BLUETOOTH_CONNECT
-                ),
-                PERMISSIONS_REQUEST_CODE
-            )
-        } else {
+        if (needed.all { ContextCompat.checkSelfPermission(this, it) == PERMISSION_GRANTED }) {
             startAudioSwitch()
             makeCall()
+        } else {
+            permissionLauncher.launch(needed.toTypedArray())
         }
-    }
-
-    private fun hasPermissions(context: Context?, vararg permissions: String?): Boolean {
-        if (context != null) {
-            for (permission in permissions) {
-                if (ActivityCompat.checkSelfPermission(
-                        context,
-                        permission!!
-                    ) != PERMISSION_GRANTED
-                ) {
-                    return false
-                }
-            }
-        }
-        return true
     }
 
     override fun onResume() {
@@ -266,201 +140,222 @@ class VoiceActivity : AppCompatActivity() {
         startAudioSwitch()
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
-        /*
-         * Check if required permissions are granted
-         */
-        if (Build.VERSION.SDK_INT >= VERSION_CODES.S) {
-            if (!hasPermissions(this, Manifest.permission.RECORD_AUDIO)) {
-                Snackbar.make(
-                    binding.rootView,
-                    "Microphone permission needed. Please allow in your application settings.",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            } else {
-                if (!hasPermissions(this, Manifest.permission.BLUETOOTH_CONNECT)) {
-                    Snackbar.make(
-                        binding.rootView,
-                        "Without bluetooth permission app will fail to use bluetooth.",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                }
-                /*
-                 * Due to bluetooth permissions being requested at the same time as mic
-                 * permissions, AudioSwitch should be started after providing the user the option
-                 * to grant the necessary permissions for bluetooth.
-                 */
-                startAudioSwitch()
-                makeCall()
-            }
-        } else {
-            if (!hasPermissions(this, Manifest.permission.RECORD_AUDIO)) {
-                Snackbar.make(
-                    binding.rootView,
-                    "Microphone permissions needed. Please allow in your application settings.",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            } else {
-                startAudioSwitch()
-                makeCall()
-            }
-        }
+    private fun startAudioSwitch() {
+        audioSwitch?.start { _: List<AudioDevice?>?, _: AudioDevice? -> Unit }
+    }
 
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    private fun toggleSpeaker() {
+        if (audioSwitch?.selectedAudioDevice is AudioDevice.Earpiece) {
+            audioSwitch?.selectDevice(audioSwitch?.availableAudioDevices?.firstOrNull { it is AudioDevice.Speakerphone })
+        } else {
+            audioSwitch?.selectDevice(audioSwitch?.availableAudioDevices?.firstOrNull { it is AudioDevice.Earpiece })
+        }
     }
 
     private fun makeCall() {
         boostlingoSdk.makeVoiceCall(callRequest)
             .subscribeOn(AndroidSchedulers.mainThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { updateUI(State.CALLING) }
-            .subscribe(
-                {
-                    currentCall = it
-                },
-                ::handleError
-            )
+            .doOnSubscribe { updateState(State.CALLING) }
+            .subscribe({ currentCall = it }, ::handleError)
             .let { compositeDisposable.add(it) }
     }
 
-    private fun updateUI(state: State) {
-        when (state) {
-            State.NO_CALL -> {
-                binding.statusTextView.text = "No active call"
-                binding.muteSwitch.isEnabled = false
-                binding.speakerSwitch.isEnabled = false
-                binding.hangupButton.isEnabled = false
-                binding.chatButton.isEnabled = false
-            }
-            State.CALLING -> {
-                binding.statusTextView.text = "Calling"
-                binding.muteSwitch.isEnabled = false
-                binding.speakerSwitch.isEnabled = false
-                binding.hangupButton.isEnabled = true
-                binding.chatButton.isEnabled = false
-            }
-            State.IN_PROGRESS -> {
-                binding.statusTextView.text = "Call with: " + currentCall?.interlocutorInfo?.requiredName
-                binding.muteSwitch.isEnabled = true
-                binding.speakerSwitch.isEnabled = true
-                binding.hangupButton.isEnabled = true
-                binding.chatButton.isEnabled = true
-            }
-        }
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        updateUI(State.NO_CALL)
+    private fun hangUp() {
         boostlingoSdk.hangUp()
             .subscribeOn(AndroidSchedulers.mainThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    updateUI(State.NO_CALL)
-                },
-                ::handleError
-            )
+            .subscribe({ updateState(State.NO_CALL) }, ::handleError)
             .let { compositeDisposable.add(it) }
+    }
 
-        super.onBackPressed()
+    private fun sendTestMessage() {
+        boostlingoSdk.sendChatMessage("TEST")
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ message = "Chat message sent: ${it.text}" }, ::handleError)
+            .let { compositeDisposable.add(it) }
+    }
+
+    private fun dialThirdParty() {
+        currentCall?.dialThirdParty("18004444444")
+            ?.subscribeOn(AndroidSchedulers.mainThread())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe({ Log.d(null, "dialThirdParty success") }, { Log.d(null, it.localizedMessage.orEmpty()) })
+            ?.let { compositeDisposable.add(it) }
+    }
+
+    private fun muteThirdParty() {
+        currentCall?.participants
+            ?.firstOrNull { it.participantType == BLParticipantType.THIRD_PARTY }
+            ?.let { participant ->
+                currentCall?.muteThirdPartyParticipant(participant.identity, participant.isAudioEnabled)
+                    ?.subscribeOn(AndroidSchedulers.mainThread())
+                    ?.observeOn(AndroidSchedulers.mainThread())
+                    ?.subscribe({ Log.d(null, "muteThirdPartyParticipant success") }, { Log.d(null, it.localizedMessage.orEmpty()) })
+                    ?.let { compositeDisposable.add(it) }
+            }
+    }
+
+    private fun hangUpThirdParty() {
+        currentCall?.participants
+            ?.firstOrNull { it.participantType == BLParticipantType.THIRD_PARTY }
+            ?.let { participant ->
+                currentCall?.hangupThirdPartyParticipant(participant.identity)
+                    ?.subscribeOn(AndroidSchedulers.mainThread())
+                    ?.observeOn(AndroidSchedulers.mainThread())
+                    ?.subscribe({ Log.d(null, "hangupThirdPartyParticipant success") }, { Log.d(null, it.localizedMessage.orEmpty()) })
+                    ?.let { compositeDisposable.add(it) }
+            }
+    }
+
+    private fun updateState(state: State) {
+        when (state) {
+            State.NO_CALL -> { status = "No active call"; controlsEnabled = false }
+            State.CALLING -> { status = "Calling"; controlsEnabled = false }
+            State.IN_PROGRESS -> { status = "Call with: ${currentCall?.interlocutorInfo?.requiredName}"; controlsEnabled = true }
+        }
     }
 
     private fun handleCallEvent(callEvent: BLCallEvent) {
         when (callEvent) {
             is BLCallEvent.CallConnected -> {
-                Log.d(null, "BLCallEvent.CallConnected")
                 audioSwitch?.activate()
                 currentCall = callEvent.call as BLVoiceCall
-                binding.muteSwitch.isChecked = callEvent.call.isMuted
-                binding.speakerSwitch.isChecked = false
-                updateUI(State.IN_PROGRESS)
-
-                Log.d(null, "Participants: ${callEvent.call.participants.count()}")
+                muteChecked = callEvent.call.isMuted
+                speakerChecked = false
+                updateState(State.IN_PROGRESS)
             }
             is BLCallEvent.CallDisconnected -> {
-                Log.d(null, "BLCallEvent.CallDisconnected")
                 audioSwitch?.deactivate()
                 currentCall = null
-                updateUI(State.NO_CALL)
-                Snackbar.make(
-                    binding.rootView,
-                    "Call did disconnect with error: " + callEvent.e?.localizedMessage,
-                    Snackbar.LENGTH_LONG
-                ).show()
+                updateState(State.NO_CALL)
+                message = "Call did disconnect with error: ${callEvent.e?.localizedMessage}"
             }
             is BLCallEvent.CallFailedToConnect -> {
-                Log.d(null, "BLCallEvent.CallFailedToConnect")
                 audioSwitch?.deactivate()
                 currentCall = null
-                updateUI(State.NO_CALL)
-                Snackbar.make(
-                    binding.rootView,
-                    "Call did fail to connect with error: " + callEvent.e?.localizedMessage,
-                    Snackbar.LENGTH_LONG
-                ).show()
+                updateState(State.NO_CALL)
+                message = "Call did fail to connect with error: ${callEvent.e?.localizedMessage}"
             }
-            BLCallEvent.ChatConnected -> {
-                Log.d(null, "BLCallEvent.ChatConnected")
-            }
-            BLCallEvent.ChatDisconnected -> {
-                Log.d(null, "BLCallEvent.ChatDisconnected")
-            }
-            is BLCallEvent.ChatMessageReceived -> {
-                Log.d(null, "BLCallEvent.ChatMessageReceived: ${callEvent.message.text}")
-            }
-            is BLCallEvent.ParticipantAdded -> {
-                Log.d(null, "BLCallEvent.ParticipantAdded: ${callEvent.participant.accountId}")
-            }
-            is BLCallEvent.ParticipantRemoved -> {
-                Log.d(null, "BLCallEvent.ParticipantRemoved: ${callEvent.participant.accountId}")
-            }
-            is BLCallEvent.ParticipantUpdated -> {
-                Log.d(null, "BLCallEvent.ParticipantUpdated:  ${callEvent.participant.accountId}")
-            }
+            BLCallEvent.ChatConnected -> Log.d(null, "BLCallEvent.ChatConnected")
+            BLCallEvent.ChatDisconnected -> Log.d(null, "BLCallEvent.ChatDisconnected")
+            is BLCallEvent.ChatMessageReceived -> Log.d(null, "ChatMessageReceived: ${callEvent.message.text}")
+            is BLCallEvent.ParticipantAdded -> Log.d(null, "ParticipantAdded: ${callEvent.participant.accountId}")
+            is BLCallEvent.ParticipantRemoved -> Log.d(null, "ParticipantRemoved: ${callEvent.participant.accountId}")
+            is BLCallEvent.ParticipantUpdated -> Log.d(null, "ParticipantUpdated: ${callEvent.participant.accountId}")
+            is BLCallEvent.AIInterpreterStartedSpeaking -> Unit
+            is BLCallEvent.AIInterpreterStoppedSpeaking -> Unit
         }
     }
 
     private fun handleError(t: Throwable) {
-        updateUI(State.NO_CALL)
-        Snackbar.make(
-            binding.rootView,
-            "Error: " + t.localizedMessage,
-            Snackbar.LENGTH_LONG
-        ).show()
+        updateState(State.NO_CALL)
+        message = "Error: ${t.localizedMessage}"
     }
 
     override fun onDestroy() {
-        /*
-         * Tear down audio device management and restore previous volume stream
-         */
         audioSwitch?.stop()
         volumeControlStream = savedVolumeControlStream
-
         compositeDisposable.dispose()
         boostlingoSdk.dispose()
         super.onDestroy()
     }
+}
 
-    private fun startAudioSwitch() {
-        audioSwitch?.start { _: List<AudioDevice?>?, _: AudioDevice? ->
-            return@start Unit
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun CallControlsScreen(
+    title: String,
+    status: String,
+    controlsEnabled: Boolean,
+    muteChecked: Boolean,
+    onMuteChange: (Boolean) -> Unit,
+    speakerChecked: Boolean,
+    onSpeakerChange: (Boolean) -> Unit,
+    onHangUp: () -> Unit,
+    onSendTestMessage: () -> Unit,
+    onDialThirdParty: () -> Unit,
+    onMuteThirdParty: () -> Unit,
+    onHangUpThirdParty: () -> Unit,
+    message: String?,
+    onMessageShown: () -> Unit,
+) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    LaunchedEffect(message) {
+        message?.let {
+            snackbarHostState.showSnackbar(it)
+            onMessageShown()
         }
     }
 
-    private enum class State {
-        NO_CALL,
-        CALLING,
-        IN_PROGRESS
+    Scaffold(
+        topBar = { TopAppBar(title = { Text(title) }) },
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Text(status, color = MaterialTheme.colorScheme.primary)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(24.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                ToggleRow("Mute", muteChecked, controlsEnabled, onMuteChange)
+                ToggleRow("Speaker", speakerChecked, controlsEnabled, onSpeakerChange)
+            }
+            Button(onClick = onHangUp, enabled = controlsEnabled, modifier = Modifier.fillMaxWidth()) {
+                Text("Hang Up")
+            }
+            Button(onClick = onSendTestMessage, enabled = controlsEnabled, modifier = Modifier.fillMaxWidth()) {
+                Text("Send Test Message")
+            }
+            Button(onClick = onDialThirdParty, enabled = controlsEnabled, modifier = Modifier.fillMaxWidth()) {
+                Text("Dial Third-Party")
+            }
+            Button(onClick = onMuteThirdParty, enabled = controlsEnabled, modifier = Modifier.fillMaxWidth()) {
+                Text("Mute Third-Party")
+            }
+            Button(onClick = onHangUpThirdParty, enabled = controlsEnabled, modifier = Modifier.fillMaxWidth()) {
+                Text("Hang Up Third-Party")
+            }
+        }
     }
+}
 
-    private companion object {
+@Composable
+private fun ToggleRow(label: String, checked: Boolean, enabled: Boolean, onChange: (Boolean) -> Unit) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(label)
+        Switch(checked = checked, onCheckedChange = onChange, enabled = enabled)
+    }
+}
 
-        const val MIC_PERMISSION_REQUEST_CODE = 1
-        const val PERMISSIONS_REQUEST_CODE = 100
+@Preview(showBackground = true, name = "Voice — in progress")
+@Composable
+private fun CallControlsScreenPreview() {
+    BoostlingoTheme {
+        CallControlsScreen(
+            title = "Voice Call",
+            status = "Call with: Jane Interpreter",
+            controlsEnabled = true,
+            muteChecked = false,
+            onMuteChange = {},
+            speakerChecked = true,
+            onSpeakerChange = {},
+            onHangUp = {},
+            onSendTestMessage = {},
+            onDialThirdParty = {},
+            onMuteThirdParty = {},
+            onHangUpThirdParty = {},
+            message = null,
+            onMessageShown = {},
+        )
     }
 }

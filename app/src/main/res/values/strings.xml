@@ -7,6 +7,7 @@
     <string name="language_to">Language To</string>
     <string name="service_type">Service Type</string>
     <string name="gender">Gender</string>
+    <string name="company_id">Company Id</string>
     <string name="voice_call">Voice Call</string>
     <string name="hang_up">Hang Up</string>
     <string name="mute">Mute</string>
@@ -16,4 +17,6 @@
     <string name="permissions_needed">Camera and Microphone permissions needed. Please allow in App Settings for additional functionality.</string>
     <string name="video_call">Video Call</string>
     <string name="send_test_message">Send Test Message</string>
+    <string name="ai_call">AI Interpreter Call</string>
+    <string name="interrupt">Interrupt AI</string>
 </resources>

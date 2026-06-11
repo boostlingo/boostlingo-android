@@ -10,39 +10,46 @@ In order to place calls in Boostlingo, you must have a requestor account. You ca
 
 ### AAR
 
-[Download](https://github.com/boostlingo/boostlingo-android/releases/download/v1.0.2/boostlingo-release.aar) the lastest version of the Boostlingo library and put it into your /libs folder.
+The SDK is distributed as a prebuilt AAR. [Download](https://github.com/boostlingo/boostlingo-android/releases)
+the latest `boostlingo-release.aar` from the releases page and put it into your app's `/libs` folder.
 
-Add all needed dependencies into your `build.gradle`:
+> Requires `minSdk 23` or higher in the consuming app.
+
+Because a bare AAR carries no dependency metadata, you must also declare every transitive
+dependency yourself. Add the following to your app module's `build.gradle.kts` (versions
+match the SDK build — see [`gradle/libs.versions.toml`](gradle/libs.versions.toml)):
 
 ```kotlin
-// Boostlingo
-implementation fileTree(dir: 'libs', include: ['*.aar'])
+dependencies {
+    // Boostlingo
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
 
-// SignalR
-implementation 'com.microsoft.signalr:signalr:7.0.4'
+    // SignalR
+    implementation("com.microsoft.signalr:signalr:10.0.8")
 
-// Rx
-implementation 'io.reactivex.rxjava3:rxkotlin:3.0.1'
-implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    // Rx
+    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
 
-// Retrofit
-implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
-implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava3:3.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
 
-// OkHttp
-implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
-implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:5.3.2")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.3.2")
 
-// Twilio Voice
-implementation 'com.twilio:voice-android:6.1.3'
-
-// Twilio Video
-implementation 'com.twilio:video-android-ktx:7.6.1'
-
-// Twilio AudioSwitch
-implementation 'com.twilio:audioswitch:1.1.7'
+    // Twilio
+    implementation("com.twilio:voice-android:6.10.3")
+    implementation("com.twilio:video-android-ktx:7.10.4")
+    implementation("com.twilio:audioswitch:1.2.5")
+}
 ```
+
+> If your app still uses a Groovy `build.gradle`, the equivalent is
+> `implementation fileTree(dir: 'libs', include: ['*.aar'])` plus
+> `implementation 'group:artifact:version'` lines for each dependency above.
 
 ## Usage
 
@@ -356,8 +363,8 @@ currentCall.dialThirdParty("18004444444")
 
 You can find more documentation and useful information below:
 
-* [Quickstart](https://github.com/boostlingo/boostlingo-android/tree/master)
-* [Doc](http://connect.boostlingo.com/sdk/boostlingo-android/1.0/docs/index.html)
+* [Quickstart](https://github.com/boostlingo/boostlingo-android/tree/main)
+* [Doc](https://boostlingo.github.io/boostlingo-android/)
 
 # Package com.boostlingo.android
 

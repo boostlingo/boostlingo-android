@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>com.boostlingo.android</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    Boostlingo Android SDK
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":boostlingo/release">release</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":boostlingo/release"
+                                       data-filter=":boostlingo/release"/>
+                                <span class="checkbox--icon"></span>
+                                release
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Boostlingo Android SDK
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="Boostlingo Android SDK::com.boostlingo.android////PointingToDeclaration//-1083108478">
+  <div class="breadcrumbs"><a href="../../index.html">Boostlingo Android SDK</a><span class="delimiter">/</span><span class="current">com.boostlingo.android</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><p class="paragraph">Boostlingo SDK package.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="1147999945%2FClasslikes%2F-1083108478" anchor-label="AdditionalField" id="1147999945%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-additional-field/index.html"><span>Additional</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1147999945%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-additional-field/index.html">AdditionalField</a><span class="token keyword"> implements </span><a href="https://developer.android.com/reference/kotlin/android/os/Parcelable.html">Parcelable</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2041596150%2FClasslikes%2F-1083108478" anchor-label="BLAICall" id="2041596150%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-a-i-call/index.html"><span><span>BLAICall</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2041596150%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-b-l-a-i-call/index.html">BLAICall</a><span class="token keyword"> extends </span><a href="-b-l-voice-call/index.html">BLVoiceCall</a></div><div class="brief "><p class="paragraph">Represents an AI Interpreter call: a signaling and media session where the remote interlocutor is the Boostlingo AI Interpreter.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2060833058%2FClasslikes%2F-1083108478" anchor-label="BLCall" id="-2060833058%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-call/index.html"><span><span>BLCall</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2060833058%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-b-l-call/index.html">BLCall</a></div><div class="brief "><p class="paragraph">The <i>BLCall</i> class represents a signaling and media session between the host device and Boostlingo infrastructure.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2133605482%2FClasslikes%2F-1083108478" anchor-label="BLCallEvent" id="2133605482%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-call-event/index.html"><span>BLCall</span><wbr></wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2133605482%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">class </span><a href="-b-l-call-event/index.html">BLCallEvent</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="996988124%2FClasslikes%2F-1083108478" anchor-label="BLCameraSource" id="996988124%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-camera-source/index.html"><span>BLCamera</span><wbr></wbr><span><span>Source</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="996988124%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">enum </span><a href="-b-l-camera-source/index.html">BLCameraSource</a><span class="token keyword"> extends </span><a href="https://developer.android.com/reference/kotlin/java/lang/Enum.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-b-l-camera-source/index.html">BLCameraSource</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1482934697%2FClasslikes%2F-1083108478" anchor-label="BLException" id="-1482934697%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-exception/index.html"><span><span>BLException</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1482934697%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">class </span><a href="-b-l-exception/index.html">BLException</a><span class="token keyword"> extends </span><a href="https://developer.android.com/reference/kotlin/java/lang/Exception.html">Exception</a></div><div class="brief "><p class="paragraph">Exceptions related to making call that can be raised by the SDK.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-844822692%2FClasslikes%2F-1083108478" anchor-label="BLLogLevel" id="-844822692%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-log-level/index.html"><span>BLLog</span><wbr></wbr><span><span>Level</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-844822692%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">enum </span><a href="-b-l-log-level/index.html">BLLogLevel</a><span class="token keyword"> extends </span><a href="https://developer.android.com/reference/kotlin/java/lang/Enum.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-b-l-log-level/index.html">BLLogLevel</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">An enumeration indicating log levels that can be used with the SDK.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="27119283%2FClasslikes%2F-1083108478" anchor-label="BLParticipant" id="27119283%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-participant/index.html"><span><span>BLParticipant</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="27119283%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword"></span><span class="token keyword">class </span><a href="-b-l-participant/index.html">BLParticipant</a></div><div class="brief "><p class="paragraph">The <i>BLParticipant</i> struct represents a <i>BLCall</i> participant information.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1068221538%2FClasslikes%2F-1083108478" anchor-label="BLParticipantState" id="-1068221538%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-participant-state/index.html"><span>BLParticipant</span><wbr></wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1068221538%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">enum </span><a href="-b-l-participant-state/index.html">BLParticipantState</a><span class="token keyword"> extends </span><a href="https://developer.android.com/reference/kotlin/java/lang/Enum.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-b-l-participant-state/index.html">BLParticipantState</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1048423527%2FClasslikes%2F-1083108478" anchor-label="BLParticipantType" id="-1048423527%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-participant-type/index.html"><span>BLParticipant</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1048423527%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">enum </span><a href="-b-l-participant-type/index.html">BLParticipantType</a><span class="token keyword"> extends </span><a href="https://developer.android.com/reference/kotlin/java/lang/Enum.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-b-l-participant-type/index.html">BLParticipantType</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1071711123%2FClasslikes%2F-1083108478" anchor-label="BLVideoCall" id="-1071711123%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-video-call/index.html"><span>BLVideo</span><wbr></wbr><span><span>Call</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1071711123%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-b-l-video-call/index.html">BLVideoCall</a><span class="token keyword"> extends </span><a href="-b-l-call/index.html">BLCall</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="730750742%2FClasslikes%2F-1083108478" anchor-label="BLVoiceCall" id="730750742%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-voice-call/index.html"><span>BLVoice</span><wbr></wbr><span><span>Call</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="730750742%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">class </span><a href="-b-l-voice-call/index.html">BLVoiceCall</a><span class="token keyword"> extends </span><a href="-b-l-call/index.html">BLCall</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1757714648%2FClasslikes%2F-1083108478" anchor-label="BoostlingoSDK" id="1757714648%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-boostlingo-s-d-k/index.html"><span>Boostlingo</span><wbr></wbr><span><span>SDK</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1757714648%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-boostlingo-s-d-k/index.html">BoostlingoSDK</a></div><div class="brief "><p class="paragraph"><i>BoostlingoSDK</i> is the entry point to the Boostlingo SDK. Used for accessing the Boostlingo API as well as initiating Calls.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-963271560%2FClasslikes%2F-1083108478" anchor-label="CallDetails" id="-963271560%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-call-details/index.html"><span>Call</span><wbr></wbr><span><span>Details</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-963271560%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-call-details/index.html">CallDetails</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-140957612%2FClasslikes%2F-1083108478" anchor-label="CallDictionaries" id="-140957612%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-call-dictionaries/index.html"><span>Call</span><wbr></wbr><span><span>Dictionaries</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-140957612%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-call-dictionaries/index.html">CallDictionaries</a></div><div class="brief "><p class="paragraph">Call dictionaries model.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1094558923%2FClasslikes%2F-1083108478" anchor-label="CallRequest" id="1094558923%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-call-request/index.html"><span>Call</span><wbr></wbr><span><span>Request</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1094558923%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-call-request/index.html">CallRequest</a><span class="token keyword"> implements </span><a href="https://developer.android.com/reference/kotlin/android/os/Parcelable.html">Parcelable</a></div><div class="brief "><p class="paragraph">Call request model.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1333321965%2FClasslikes%2F-1083108478" anchor-label="CameraCapturerCompat" id="-1333321965%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-camera-capturer-compat/index.html"><span>Camera</span><wbr></wbr><span>Capturer</span><wbr></wbr><span><span>Compat</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1333321965%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-camera-capturer-compat/index.html">CameraCapturerCompat</a><span class="token keyword"> implements </span><span data-unresolved-link="com.twilio.video/VideoCapturer///PointingToDeclaration/">VideoCapturer</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-695804083%2FClasslikes%2F-1083108478" anchor-label="ChatMessage" id="-695804083%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-chat-message/index.html"><span>Chat</span><wbr></wbr><span><span>Message</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-695804083%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-chat-message/index.html">ChatMessage</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-417730461%2FClasslikes%2F-1083108478" anchor-label="ChatUser" id="-417730461%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-chat-user/index.html"><span>Chat</span><wbr></wbr><span><span>User</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-417730461%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-chat-user/index.html">ChatUser</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="995217381%2FClasslikes%2F-1083108478" anchor-label="Gender" id="995217381%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-gender/index.html"><span><span>Gender</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="995217381%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-gender/index.html">Gender</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-817374157%2FClasslikes%2F-1083108478" anchor-label="ImageInfo" id="-817374157%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-image-info/index.html"><span>Image</span><wbr></wbr><span><span>Info</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-817374157%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-image-info/index.html">ImageInfo</a></div><div class="brief "><p class="paragraph">Image info model.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2133138636%2FClasslikes%2F-1083108478" anchor-label="InterpreterInfo" id="-2133138636%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-interpreter-info/index.html"><span>Interpreter</span><wbr></wbr><span><span>Info</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2133138636%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-interpreter-info/index.html">InterpreterInfo</a></div><div class="brief "><p class="paragraph"><i>InterpreterInfo</i> instances encapsulate information about the call interpreter.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="927872494%2FClasslikes%2F-1083108478" anchor-label="Language" id="927872494%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-language/index.html"><span><span>Language</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="927872494%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-language/index.html">Language</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1470204429%2FClasslikes%2F-1083108478" anchor-label="Profile" id="-1470204429%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-profile/index.html"><span><span>Profile</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1470204429%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-profile/index.html">Profile</a></div><div class="brief "><p class="paragraph">Profile model.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="965036365%2FClasslikes%2F-1083108478" anchor-label="ServiceType" id="965036365%2FClasslikes%2F-1083108478" data-filterable-set=":boostlingo/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":boostlingo/release" data-filterable-set=":boostlingo/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-service-type/index.html"><span>Service</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="965036365%2FClasslikes%2F-1083108478"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":boostlingo/release"><div class="symbol monospace"><span class="token keyword">public </span><span class="token keyword">final </span><span class="token keyword">class </span><a href="-service-type/index.html">ServiceType</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+[versions]
+# Build toolchain
+agp = "9.2.1"
+kotlin = "2.3.21"
+dokka = "2.2.0"
+
+# AndroidX / Google
+androidxCore = "1.18.0"
+androidxAppcompat = "1.7.1"
+androidMaterial = "1.14.0"
+androidxConstraintlayout = "2.2.1"
+
+# Jetpack Compose — quickstart demo UI only (the :boostlingo library has no UI)
+composeBom = "2026.05.01"
+androidxActivityCompose = "1.13.0"
+
+# Networking / realtime
+signalr = "10.0.8"
+retrofit = "3.0.0"
+okhttp = "5.3.2"
+
+# Rx
+rxkotlin = "3.0.1"
+rxandroid = "3.0.2"
+
+# Twilio
+twilioVoice = "6.10.3"
+twilioVideo = "7.10.4"
+twilioAudioswitch = "1.2.5"
+
+# Testing
+mockk = "1.14.3"
+androidxTestExtJunit = "1.3.0"
+androidxEspresso = "3.7.0"
+
+[libraries]
+# AndroidX / Google
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppcompat" }
+android-material = { group = "com.google.android.material", name = "material", version.ref = "androidMaterial" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidxConstraintlayout" }
+
+# Jetpack Compose (versions managed by the Compose BOM platform)
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivityCompose" }
+
+# SignalR
+signalr = { group = "com.microsoft.signalr", name = "signalr", version.ref = "signalr" }
+
+# Retrofit
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-adapter-rxjava3 = { group = "com.squareup.retrofit2", name = "adapter-rxjava3", version.ref = "retrofit" }
+retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+
+# OkHttp
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+
+# Rx
+rxkotlin = { group = "io.reactivex.rxjava3", name = "rxkotlin", version.ref = "rxkotlin" }
+rxandroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxandroid" }
+
+# Twilio
+twilio-voice-android = { group = "com.twilio", name = "voice-android", version.ref = "twilioVoice" }
+twilio-video-android-ktx = { group = "com.twilio", name = "video-android-ktx", version.ref = "twilioVideo" }
+twilio-audioswitch = { group = "com.twilio", name = "audioswitch", version.ref = "twilioAudioswitch" }
+
+# Testing — JVM unit tests use kotlin.test on a JUnit 5 (Jupiter) backend
+kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5", version.ref = "kotlin" }
+# MockK — mocking framework for JVM unit tests
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+# Instrumented (androidTest) tests stay on AndroidX Test / JUnit 4
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExtJunit" }
+androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxEspresso" }
+
+# Dokka — render Kotlin API as Java for consumers
+# NB: avoid an `as` segment in the alias — it is a Kotlin keyword and breaks the generated accessor.
+dokka-kotlinAsJava-plugin = { group = "org.jetbrains.dokka", name = "kotlin-as-java-plugin", version.ref = "dokka" }
+
+# Build-logic classpath dependencies (used only by buildLogic convention plugins)
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+# AGP 9 provides built-in Kotlin support, so no org.jetbrains.kotlin.android plugin is applied.
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+
+# Convention plugins defined by the buildLogic included build
+boostlingo-android-library = { id = "boostlingo.android.library", version = "unspecified" }
+boostlingo-android-application = { id = "boostlingo.android.application", version = "unspecified" }
+
+[bundles]
+retrofit = ["retrofit", "retrofit-adapter-rxjava3", "retrofit-converter-gson"]
+okhttp = ["okhttp", "okhttp-logging-interceptor"]
+rxjava = ["rxkotlin", "rxandroid"]
+twilio = ["twilio-voice-android", "twilio-video-android-ktx", "twilio-audioswitch"]
+compose = ["androidx-compose-ui", "androidx-compose-ui-graphics", "androidx-compose-ui-tooling-preview", "androidx-compose-material3"]
